@@ -1,13 +1,15 @@
 #!/bin/bash
+set -e  # exit on any error
+set -x  # print each command
 
-# Pull the Mistral model if not already downloaded
+echo "👉 Pulling Mistral model"
 ollama pull mistral
 
-# Start Ollama in background
+echo "👉 Starting Ollama server"
 ollama serve &
 
-# Wait for Ollama to boot up
+echo "⏳ Waiting for Ollama to start..."
 sleep 5
 
-# Start Flask server
+echo "🚀 Starting Flask app"
 python app.py

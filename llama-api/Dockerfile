@@ -11,6 +11,11 @@ ENV PATH="/opt/venv/bin:$PATH"
 # Set working directory
 WORKDIR /app
 
+RUN python3 --version
+RUN pip3 --version
+RUN ls -la /app
+RUN cat requirements.txt
+
 # Install Python dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
