@@ -11,11 +11,6 @@ ENV PATH="/opt/venv/bin:$PATH"
 # Set working directory
 WORKDIR /app
 
-RUN python3 --version
-RUN pip3 --version
-RUN ls -la /app
-RUN cat requirements.txt
-
 # Install Python dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
@@ -25,6 +20,9 @@ COPY . .
 
 # Expose Flask port
 EXPOSE 5000
+
+# Add this line at the bottom, before CMD
+ENTRYPOINT []
 
 # Run Ollama and Flask app together
 CMD ["./start.sh"]
