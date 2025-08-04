@@ -1,20 +1,25 @@
-# Use base image with Ollama installed
+# Use Ollama base image
 FROM ollama/ollama
 
-# Install Python
-RUN apt-get update && \
-    apt-get install -y python3 python3-pip
+# Install system dependencies
+RUN apt-get update && apt-get install -y python3 python3-pip python3-venv
 
-# Set workdir
+# Create and activate virtual environment
+RUN python3 -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+
+# Set working directory
 WORKDIR /app
 
-# Copy app files
+# Install Python dependencies
 COPY requirements.txt .
-RUN pip3 install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
+# Copy all app files
 COPY . .
 
-# Run on port 8000
-EXPOSE 8000
+# Expose Flask port
+EXPOSE 5000
 
+# Run Ollama and Flask app together
 CMD ["./start.sh"]

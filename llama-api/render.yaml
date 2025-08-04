@@ -1,9 +1,7 @@
 services:
   - type: web
-    name: llama-api-server
+    name: mistral-api-service
     env: docker
     plan: starter
-    region: oregon
     buildCommand: "./build.sh"
     startCommand: "./start.sh"
-    autoDeploy: false
